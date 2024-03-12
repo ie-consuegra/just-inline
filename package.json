@@ -1,0 +1,11 @@
+{
+  "name": "just-inline",
+  "version": "0.0.1",
+  "description": "Just Inline is designed for seamless file bundling, combining CSS, JavaScript, and HTML files into a single cohesive unit. By traversing through nested references within the code, it ensures thorough integration and streamlined development workflow.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": ["inline", "html", "css", "js"],
+  "author": "ieconsuegra",
+  "license": "MIT"
+}
