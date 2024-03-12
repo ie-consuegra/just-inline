@@ -19,7 +19,7 @@ HTML
 
 JS
 ```JS
-/* inline:"header.html" */
+/* inline:"utils.js" */
 ```
 just-inline will replace any of those references for the content of the file specified. And will create a new file with those references changed.
 
