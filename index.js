@@ -10,19 +10,16 @@ function readFileContent(filePath) {
   return fs.readFileSync(filePath, 'utf8');
 }
 
-function replaceReferences(text, inputFileDir, inputFileExt) {
-  let referenceRegex = /\/\*\sinline:"(.*?)"\s\*\/\n?/g;
+function replaceReferences(text, inputFileDir) {
+  const referenceRegex = /(?:\/\*\s*{{\s*(.*?)\s*}}\s*\*\/)|(?:<!--\s*{{\s*(.*?)\s*}}\s*-->)/g;
 
-  if (inputFileExt === '.html') {
-    referenceRegex = /<!-- inline:"(.*?)" -->/g;
-  }
-  return text.replace(referenceRegex, (match, filePath) => {
+  return text.replace(referenceRegex, (match, filePath1, filePath2) => {
+    const filePath = filePath1 || filePath2;
     const referencedFilePath = path.join(inputFileDir, filePath);
     const referencedContent = readFileContent(referencedFilePath);
     return replaceReferences(
       referencedContent,
-      path.dirname(referencedFilePath),
-      path.extname(referencedFilePath)
+      path.dirname(referencedFilePath)
     );
   });
 }
