@@ -39,6 +39,8 @@ fs.readFile(configFilePath, 'utf8', (err, configData) => {
       const inputFile = entry[0];
       const outputFile = entry[1];
 
+      console.log(`*  Bundling ${inputFile}...`);
+
       // Read input file, replace references, and write to output file
       fs.readFile(inputFile, 'utf8', (err, data) => {
         if (err) {
@@ -56,7 +58,7 @@ fs.readFile(configFilePath, 'utf8', (err, configData) => {
             console.error('Error writing to output file:', err);
             return;
           }
-          console.log('Output file generated successfully:', outputFile);
+          console.log('✔️  Done, output file generated successfully:', outputFile);
         });
       });
     });
