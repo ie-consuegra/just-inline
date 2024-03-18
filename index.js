@@ -5,7 +5,6 @@ const path = require('path');
 
 const configFilePath = 'inline.config.json';
 
-// Function to read a file and return its content
 function readFileContent(filePath) {
   return fs.readFileSync(filePath, 'utf8');
 }
@@ -24,10 +23,40 @@ function replaceReferences(text, inputFileDir) {
   });
 }
 
-// Read config file
+function askToCreateConfigFile() {
+  const entries = { input: '', output: '' };
+
+  const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  readline.question('\n 👉 Would you like to create an inline.config.json file? y/n \n', (response) => {
+    if (response.toLowerCase() === 'y' || response.toLowerCase() === 'yes') {
+      try {
+        const configFileContent = 
+`{
+    "entries": [
+        ["", ""]
+    ]
+}`;
+
+        fs.writeFileSync('./inline.config.json', configFileContent);
+        console.log('✔️  Done, inline.config.json file generated successfully');
+        console.log(' Set the path of your input and output files and then run just-inline again.');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    readline.close();
+    return;
+  })
+}
+
 fs.readFile(configFilePath, 'utf8', (err, configData) => {
   if (err) {
     console.error('Error reading config file:', err);
+    askToCreateConfigFile();
     return;
   }
 
@@ -41,7 +70,6 @@ fs.readFile(configFilePath, 'utf8', (err, configData) => {
 
       console.log(`*  Bundling ${inputFile}...`);
 
-      // Read input file, replace references, and write to output file
       fs.readFile(inputFile, 'utf8', (err, data) => {
         if (err) {
           console.error('Error reading input file:', err);
