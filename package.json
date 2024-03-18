@@ -8,5 +8,6 @@
   "bin": {"just-inline": "index.js"},
   "keywords": ["inline", "html", "css", "js"],
   "author": "ieconsuegra",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://github.com/ie-consuegra/just-inline"
 }

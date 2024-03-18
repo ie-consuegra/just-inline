@@ -12,7 +12,8 @@ In any HTML, JS or CSS file you can point to a file that contains code you want 
 
 To do so, write {{ file-to-insert.ext }} as comments in your file.
 
-### HTML
+### Examples
+#### HTML
 ```HTML
 <!-- {{ header.html }} -->
 ```
@@ -23,7 +24,7 @@ To do so, write {{ file-to-insert.ext }} as comments in your file.
 </div>
 ```
 
-### JS
+#### JS
 ```JS
 /* {{ utils.js }} */
 ```
@@ -31,7 +32,7 @@ just-inline will replace those references for the content of the file specified.
 
 To let know just-inline what is the template file (the entry or input file) create an inline.config.json to set the input and output file names and paths.
 
-```
+```JSON
 {
   "entries": [
     ["./input.html", "./output.html"]
@@ -40,11 +41,21 @@ To let know just-inline what is the template file (the entry or input file) crea
 ```
 You can set several entries:
 
-```
+```JSON
 {
   "entries": [
     ["./input.html", "./output.html"],
     ["./input2.html", "./output2.html"]
   ]
+}
+```
+
+Finally, set a new command on your package.json, and run it whenever you want to generate a new file with the specified insertions in its code.
+
+```JSON
+{
+ "scripts": {
+    "build": "just-inline"
+ }
 }
 ```
